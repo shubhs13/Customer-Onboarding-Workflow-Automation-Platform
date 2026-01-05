@@ -3,6 +3,8 @@ package com.example.customer_onboarding.controller;
 import com.example.customer_onboarding.dto.CustomerOnboardingRequest;
 import com.example.customer_onboarding.entity.CustomerOnboarding;
 import com.example.customer_onboarding.service.CustomerOnboardingService;
+import com.example.customer_onboarding.workflow.UserRole;
+
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -31,5 +33,18 @@ public class CustomerOnboardingController {
     @GetMapping("/{id}")
     public CustomerOnboarding getById(@PathVariable Long id){
         return service.getById(id);
-}
+    }
+    @PostMapping("/{id}/approve")
+    public CustomerOnboarding approve(
+        @PathVariable Long id,
+        @RequestParam UserRole role){
+            return service.approve(id, role);
+        }
+    @PostMapping("/{id}/reject")
+    public CustomerOnboarding reject(
+        @PathVariable Long id,
+        @RequestParam UserRole role){
+            return service.reject(id, role);
+        }
+    
 }
